@@ -8,6 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
+import org.apache.xmlbeans.XmlException;
+
+import java.io.IOException;
+
 import cn.net.darking.excelread.utils.POIExcelHelper;
 import cn.net.darking.excelread.utils.PhotoOrVideoUtils;
 
@@ -66,11 +71,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                e.printStackTrace();
 //            }
 
-            POIExcelHelper poiExcelHelper = new POIExcelHelper(path);
+            POIExcelHelper poiExcelHelper = new POIExcelHelper();
 
-
-
-
+            Log.e("开始时间",System.currentTimeMillis()+"");
+//            poiExcelHelper.getExcelDatas(new String[]{path},new String[]{"测试type"});
+            try {
+                poiExcelHelper.test(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e("IOException", e.toString());
+            } catch (OpenXML4JException e) {
+                e.printStackTrace();
+                Log.e("OpenXML4JException", e.toString());
+            } catch (XmlException e) {
+                e.printStackTrace();
+                Log.e("XmlException", e.toString());
+            }
+            Log.e("结束时间",System.currentTimeMillis()+"");
 
         }
 
